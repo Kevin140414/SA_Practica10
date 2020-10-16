@@ -1,0 +1,50 @@
+version: "3"
+services:
+  cliente:
+    container_name: cliente
+    image: cliente
+    ports:
+      - "5000:5000"
+    networks:
+      testing:
+        ipv4_address:  172.10.10.10
+    depends_on:
+      - restaurante
+      - repartidor
+      - esb
+  esb:
+    container_name: esb
+    image: esb
+    ports:
+      - "4000:4000"
+    networks:
+      testing:
+        ipv4_address:  172.10.10.11
+    depends_on:
+      - restaurante
+      - repartidor
+  restaurante:
+    container_name: restaurante
+    image: restaurante
+    ports:
+      - "3001:3001"
+    networks:
+      testing:
+        ipv4_address:  172.10.10.12
+    depends_on:
+      - repartidor
+  repartidor:
+    container_name: repartidor
+    image: repartidor
+    ports:
+      - "3002:3002"
+    networks:
+      testing:
+        ipv4_address:  172.10.10.13
+            
+networks:
+    testing:
+        ipam:
+            driver: default
+            config:
+              - subnet: 172.10.10.0/24
