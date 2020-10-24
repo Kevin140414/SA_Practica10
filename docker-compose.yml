@@ -1,4 +1,4 @@
-version: "3"
+version: "3.2"
 services:
   cliente:
     container_name: cliente
@@ -41,6 +41,21 @@ services:
     networks:
       testing:
         ipv4_address:  172.10.10.13
+
+
+  proxy:
+    image: nginx:alpine
+    container_name: proxy
+    ports: 
+      - 80:80
+    volumes:
+      - type: bind
+        source: ./proxy
+        target: /etc/nginx/conf.d
+    networks:
+      testing:
+        ipv4_address:  172.10.10.14
+
             
 networks:
     testing:

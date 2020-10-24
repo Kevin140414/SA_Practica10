@@ -18,6 +18,11 @@ Una vez ya se tienen las imagenes de docker creadas, se utilizara docker-compose
 ```
 $ sudo docker-compose up
 ```
+## Configuración de un reverse proxy, para que los servicios se encuentren en el puerto 80 bajo distintas carpetas del proxy
+### Ejemplo de configuración
+location /restaurante/ {
+	proxy_pass http://restaurante:3001;
+}
 
 ## Link del video
 - https://youtu.be/YpAO8V5F3JQ
